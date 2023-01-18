@@ -41,3 +41,26 @@ class Segurancao{
     }
 }
 
+class Criptografia extends Segurancao{
+    protected $dados;
+
+    public function deDB($dados, $chave2 = NULL){
+        $this->dados = $dados;
+        if(isset($chave2)):
+            $this->chave2 = $chave2;
+            return openssl_decrypt(base64_decode($this->dados2), "AES-256-CBC", $this->chave, OPENSSL_RAW_DATA, $this->iv);
+        else:
+            return openssl_decrypt(base64_decode($this->dados), "AES-256-CBC", $this->chave, OPENSSL_RAW_DATA, $this->iv);
+        endif;
+    }
+
+    public function enDB($dados, $chave2 = NULL){
+        $this->dados = $dados;
+        if(isset($chave2)):
+            $this->chave2 = $chave2;
+            return base64_encode(openssl_encrypt($this->dados2, "AES-256-CBC", $this->chave, OPENSSL_RAW_DATA, $this->iv));
+        else:
+            return base64_encode(openssl_encrypt($this->dados, "AES-256-CBC", $this->chave, OPENSSL_RAW_DATA, $this->iv));
+        endif;
+    }
+}
