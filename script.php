@@ -1,7 +1,7 @@
 <?php
-date_default_timezone_set('America/Sao_Paulo');
 
-class Segurancao{
+
+class DB{
     protected $admin_usuario;
     protected $admin_senha;
     protected $chave;
@@ -39,10 +39,6 @@ class Segurancao{
         endif;
         return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
     }
-}
-
-class Criptografia extends Segurancao{
-    protected $dados;
 
     public function deDB($dados, $chave2 = NULL){
         $this->dados = $dados;
@@ -64,3 +60,4 @@ class Criptografia extends Segurancao{
         endif;
     }
 }
+?>
